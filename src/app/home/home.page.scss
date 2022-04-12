@@ -1,0 +1,45 @@
+ion-header, ion-avatar{
+  font-family: 'Noto Sans';
+}
+
+#avatar{
+  float: right;
+  margin: 15px;
+}
+
+ion-card, ion-list, ion-item{
+  background-color: #181818; 
+  box-shadow: none;
+  --background: #181818;
+}
+
+/* PC VERSION !!!
+ ion-card, ion-list, ion-item{
+  background-color: transparent; 
+  box-shadow: none;
+  --background: transparent;
+  --ion-border-color: transparent;
+} */
+
+ion-item, ion-card-title{
+  padding-bottom: 0;
+}
+
+.subList{
+  padding-left: 20px;
+  padding-top: 0;
+}
+
+@media only screen and (min-width: 850px) {
+  ion-card{
+    margin-left: 35vw;
+    margin-right: 35vw;
+  }
+
+  ion-card, ion-list, ion-item{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;/* 
+    --ion-border-color: transparent; */
+  } 
+}

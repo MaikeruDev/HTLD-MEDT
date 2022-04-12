@@ -1,0 +1,11 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">Zurück</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ngx-qrcode id="code" [width]="300" [margin]="1" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="token" cssClass="bshadow"></ngx-qrcode>
+</ion-content>

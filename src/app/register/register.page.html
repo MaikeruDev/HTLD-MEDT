@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-img src="../../assets/img/htl_logo.svg"></ion-img>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title color="primary">Registrieren</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label position="floating">E-Mail </ion-label>
+        <ion-input [(ngModel)]="email" type="email" inputmode="email" pattern="email" size="email"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Passwort </ion-label>
+        <ion-input [(ngModel)]="password" type="password" inputmode="password" pattern="password" size="password"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Passwort Wiederholen</ion-label>
+        <ion-input [(ngModel)]="passwordConfirm" type="password" inputmode="password" pattern="password" size="password"></ion-input>
+      </ion-item>
+      <ion-button expand="full" (click)="authService.createUserWithEmailAndPassword(email, password, passwordConfirm)">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        Registrieren
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-text class="ion-text-center" id="ionRegisterText">
+    <p id="registerText">Du hast schon einen Account?</p>
+  </ion-text>
+  <ion-button (click)="navTo.navTo('login')" expand="block" fill="outline" id="registerBtn">
+    Anmelden
+  </ion-button>
+</ion-content>

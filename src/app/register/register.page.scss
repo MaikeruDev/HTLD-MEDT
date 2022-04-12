@@ -1,0 +1,86 @@
+#registerBtn{
+    margin-left: 35vw;
+    margin-right: 35vw;
+}
+
+#registerText{
+    margin-bottom: 12px; 
+    margin-top: 25px;
+    color: rgb(165, 165, 165);
+}
+
+#forgotPasswordText{
+    color: var(--ion-color-primary);
+}
+
+ion-card-header{
+    padding-bottom: 0;
+}
+
+ion-header{
+    margin-top: 4vh; 
+    margin-bottom: 3.2vh
+}
+
+ion-img{
+    width: 170px; 
+    margin: auto;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+}
+
+ion-card{
+    margin-left: 35vw;
+    margin-right: 35vw;
+    font-family: 'Noto Sans';
+}
+
+ion-card-title{
+    font-size: 30px;
+}
+
+ion-item{
+    font-size: 20px;
+}
+
+ion-button, #forgotPasswordText{
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 850px) {
+    ion-card-title{
+        font-size: 20px;
+    }
+    
+    ion-item{
+        font-size: 16px;
+    }
+    
+    ion-button, #forgotPasswordText{
+        font-size: 14px;
+    }
+
+    #registerBtn{
+        margin: 12px;
+    }
+
+    ion-card{
+        margin-left: 12.5px;
+        margin-right: 12.5px;
+    }
+
+    ion-img{
+        width: 115px; 
+        margin: auto;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        pointer-events: none;
+    }
+  }

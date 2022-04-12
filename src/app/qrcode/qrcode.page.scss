@@ -1,0 +1,13 @@
+#code{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+ion-header, ion-toolbar{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+    --ion-border-color: transparent;
+  }

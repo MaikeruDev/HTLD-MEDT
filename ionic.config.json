@@ -1,0 +1,7 @@
+{
+  "name": "HTLD-Medientechnik",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

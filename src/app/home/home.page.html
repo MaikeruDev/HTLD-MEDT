@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-segment (ionChange)="segmentChanged($event)" value="All">
+    <ion-segment-button value="All">
+      <ion-label>Alle</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Mine">
+      <ion-label>Meine</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor="let category of categories">
+    <ion-item>
+      <ion-card-title color="primary">{{category.name}}</ion-card-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="onClick()"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-list class="subList">
+      <ion-item *ngFor="let object of category.objects">
+        <ion-text>{{object.name}}</ion-text>
+        <ion-chip slot="end">
+          <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="cog"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="authService.signOut()"><ion-icon name="exit"></ion-icon></ion-fab-button>
+      <ion-fab-button (click)="openQRCode()"><ion-icon name="qr-code"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="person"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

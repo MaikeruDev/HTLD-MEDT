@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-img src="../../assets/img/htl_logo.svg"></ion-img>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="!scannerEnabled">
+    <ion-card-header>
+      <ion-card-title color="primary">Anmelden</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label position="floating">E-Mail </ion-label>
+        <ion-input [(ngModel)]="email" type="email" inputmode="email" pattern="email" size="email"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Passwort </ion-label>
+        <ion-input [(ngModel)]="password" type="password" inputmode="password" pattern="password" size="password"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <p (click)="navTo.navTo('forgot-password')" id="forgotPasswordText" class="ion-text-center">Passwort vergessen?</p>
+      </ion-item>
+      <ion-button expand="full" (click)="authService.signInWithEmailAndPassword(email, password)">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        Anmelden
+      </ion-button>
+      <ion-item lines="none" (click)="activateCam()">
+        <ion-icon color="dark" name="scan"></ion-icon>
+        <p id="qrLoginText" class="ion-text-center">Mit QR-Code anmelden.</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-text class="ion-text-center" id="ionRegisterText"  *ngIf="!scannerEnabled">
+    <p id="registerText">Noch keinen Account?</p>
+  </ion-text>
+  <ion-button (click)="navTo.navTo('register')" expand="block" fill="outline" id="registerBtn"  *ngIf="!scannerEnabled">
+    Registrieren
+  </ion-button>
+
+  <ion-card color="primary" style="padding: 10px" *ngIf="scannerEnabled">
+    <ion-label style="font-size: 2vh;">Richte die Kamera so aus, dass sie den QR-Code problemlos lesen kann!</ion-label>
+  </ion-card>
+  <zxing-scanner *ngIf="scannerEnabled" #scanner (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
+  
+  <ion-fab *ngIf="scannerEnabled" (click)="cancelScan()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
