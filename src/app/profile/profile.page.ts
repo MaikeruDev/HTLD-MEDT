@@ -12,7 +12,7 @@ export class ProfilePage implements OnInit {
 
   constructor(private modalController: ModalController, public authService: AuthServiceService, public db: AngularFirestore) { }
 
-  pfp: any
+  pfp: any = "https://www.caribbeangamezone.com/wp-content/uploads/2018/03/avatar-placeholder.png"
 
   ngOnInit() {
     this.authService.userDetails().subscribe(user => {

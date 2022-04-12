@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button color="dark" (click)="closeModal()" style="position: absolute;">
+              <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title color="primary" class="ion-text-center">Nikon 5100</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informationen</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-text>Status:</ion-text>
+        <ion-chip slot="end">
+          <ion-label color="success">Bereit</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-text>Ausgeliehen von:</ion-text>
+        <ion-chip slot="end">
+          <ion-avatar>
+            <img src="https://avatars.dicebear.com/api/initials/Michael Prietl.svg" />
+          </ion-avatar>
+          <ion-label>Michael Prietl</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-text>Verliehen von:</ion-text>
+        <ion-chip slot="end">
+          <ion-avatar>
+            <img src="https://avatars.dicebear.com/api/initials/Julia Gruber.svg" />
+          </ion-avatar>
+          <ion-label>Julia Gruber</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-text>Verliehen bis:</ion-text>
+        <ion-chip slot="end">
+          <ion-label>27.04.2022</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-text>Verfügbar ab:</ion-text>
+        <ion-chip slot="end">
+          <ion-label>28.04.2022</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item class="no-lines">
+        <ion-text>Notizen</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-textarea readonly>Linse zerkratzt</ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Reservierungen</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Awesome content
+    </ion-card-content>
+  </ion-card>
+</ion-content>

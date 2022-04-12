@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LoadingController, ModalController } from '@ionic/angular';
+import { ObjectInfoPage } from '../object-info/object-info.page';
 import { ProfilePage } from '../profile/profile.page';
 import { QrcodePage } from '../qrcode/qrcode.page';
 import { AuthServiceService } from '../services/auth-service.service';
@@ -38,8 +39,11 @@ export class HomePage implements OnInit {
         var objects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
-            objects.push(_object.data())
+            var temp = _object.data();
+            temp.id = _object.id;
+            objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
+            console.log(objects)
           });
         })
         tempCategory.objects = objects
@@ -62,7 +66,10 @@ export class HomePage implements OnInit {
         var objects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
-            objects.push(_object.data())
+            var temp = _object.data();
+            temp.id = _object.id;
+            objects.push(temp)
+            objects.sort((a,b) => a.status.localeCompare(b.status));
           });
         })
         tempCategory.objects = objects
@@ -85,6 +92,17 @@ export class HomePage implements OnInit {
     const modal = await this.modalController.create({
       component: ProfilePage,
       cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  async openObjectInfo(oid){
+    const modal = await this.modalController.create({
+      component: ObjectInfoPage,
+      cssClass: 'my-custom-class',
+      componentProps: { 
+        oid: oid
+      }
     });
     return await modal.present();
   }
