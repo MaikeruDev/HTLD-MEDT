@@ -27,3 +27,25 @@
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+*{
+    font-family: 'Noto Sans';
+  }
+
+.monthview-container {
+    background-color: transparent;
+}
+
+.monthview-current{
+    background-color: transparent !important;
+    border: var(--ion-color-primary) 3px solid !important;
+    color: white !important;
+}
+
+.monthview-selected{
+    background-color: var(--ion-color-primary) !important;
+}
+
+.monthview-primary-with-event{
+    background-color: var(--ion-color-secondary) !important;
+}

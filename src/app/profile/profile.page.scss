@@ -5,6 +5,10 @@ ion-header, ion-toolbar{
     --ion-border-color: transparent;
 }
 
+*{
+    font-family: 'Noto Sans';
+  }
+
 #pfpIMG{
     background-color: var(--ion-color-primary); 
     padding: 12.5px; cursor: pointer
@@ -12,6 +16,54 @@ ion-header, ion-toolbar{
 
 #pfpAvatar{
     position: absolute; 
-    bottom: 5%; 
-    right: 5%;
+    bottom: 15%; 
+    right: 15%;
 }
+
+#name{
+    margin-top: 15px
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap');
+
+ion-content{
+    display: block;
+    height: 100%;
+    --cropper-outline-color: #12121283;
+    --cropper-overlay-color: #121212;
+}
+
+.file-input__input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.file-input__label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 12px;
+    background-color: var(--ion-color-primary);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
+.file-input__label svg {
+    height: 20px;
+}
+
+
+.file-input{
+    text-align: center;
+    margin-top: 2vh;
+}
+

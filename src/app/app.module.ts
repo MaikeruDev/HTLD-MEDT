@@ -16,11 +16,16 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import {HttpClientModule} from '@angular/common/http';
 
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
+import { NgCalendarModule } from 'ionic2-calendar';
+
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [HttpClientModule, NgxQRCodeModule, BrowserModule, IonicModule.forRoot({mode: "md"}), AppRoutingModule, AngularFireStorageModule, AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],
+  imports: [IonicSelectableModule, NgCalendarModule, ImageCropperModule, HttpClientModule, NgxQRCodeModule, BrowserModule, IonicModule.forRoot({mode: "md"}), AppRoutingModule, AngularFireStorageModule, AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

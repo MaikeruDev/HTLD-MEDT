@@ -13,9 +13,14 @@ ion-toolbar, ion-header{
     --ion-border-color: transparent;
 }
 
-ion-textarea{
+#notes{
     margin-top: 0;
-    color: grey
+    color: grey;
+}
+
+div>ion-list.event-detail-container.md.list-md.hydrated{
+    background-color: transparent;
+    --ion-border-color: transparent;
 }
 
 @media only screen and (min-width: 850px) {
