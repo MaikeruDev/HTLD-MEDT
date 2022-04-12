@@ -1,0 +1,17 @@
+ion-header, ion-toolbar{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+    --ion-border-color: transparent;
+}
+
+#pfpIMG{
+    background-color: var(--ion-color-primary); 
+    padding: 12.5px; cursor: pointer
+}
+
+#pfpAvatar{
+    position: absolute; 
+    bottom: 5%; 
+    right: 5%;
+}

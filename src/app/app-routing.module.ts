@@ -38,6 +38,10 @@ const routes: Routes = [
     path: 'qrcode',
     loadChildren: () => import('./qrcode/qrcode.module').then( m => m.QrcodePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
 ];
 
 @NgModule({

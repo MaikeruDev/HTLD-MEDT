@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LoadingController, ModalController } from '@ionic/angular';
+import { ProfilePage } from '../profile/profile.page';
 import { QrcodePage } from '../qrcode/qrcode.page';
 import { AuthServiceService } from '../services/auth-service.service';
 
@@ -75,6 +76,14 @@ export class HomePage implements OnInit {
   async openQRCode(){
     const modal = await this.modalController.create({
       component: QrcodePage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  async openProfile(){
+    const modal = await this.modalController.create({
+      component: ProfilePage,
       cssClass: 'my-custom-class'
     });
     return await modal.present();
