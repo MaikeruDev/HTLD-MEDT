@@ -10,5 +10,56 @@
 </ion-header>
 
 <ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title color="primary">Name</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-input [(ngModel)]="name" placeholder="z.B. Kameras"></ion-input>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title color="primary">Status Codes</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item style="font-weight: 600; border-bottom: white solid 1px;">
+                <ion-label color="dark" slot="start" style="margin-bottom: 0;">Status</ion-label>
+                <ion-label color="dark" slot="end">Farbe</ion-label>
+            </ion-item>
 
+            <ion-item-sliding *ngFor="let item of statusCodes; let i = index" [attr.data-index]="i">
+                <ion-item lines="none">
+                    <ion-label color="dark" slot="start">{{item.status}}</ion-label>
+                    <ion-icon [ngStyle]="{color: item.color}" slot="end" name="color-palette-outline"></ion-icon>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option (click)="removeStatus(i)">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+
+            <ion-item>
+                <ion-input [(ngModel)]="status" slot="start" placeholder="z.B. Bereit"></ion-input>
+                <ion-select [(ngModel)]="colorCode" [interfaceOptions]="customPopoverOptions" interface="popover" slot="end" placeholder="Auswählen" style="margin: 0;">
+                    <ion-select-option class="standard-success" value="var(--ion-color-success)">Standard-Erfolg</ion-select-option>
+                    <ion-select-option class="standard-repair" value="var(--ion-color-danger)">Standard-Achtung</ion-select-option>
+                    <ion-select-option class="standard-other" value="var(--ion-color-secondary)">Standard-Anderes</ion-select-option>
+                    <ion-select-option value="own">Eigene Farbe</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="colorCode == 'own'" style="height: 315px;" lines="none" >
+                <span class="color-picker" [cpOutputFormat]="hex" [cpAlphaChannel]="hex6" [(colorPicker)]="color" [cpDialogDisplay]="popover" [cpToggle]="true"></span>
+            </ion-item>
+            <ion-button (click)="addStatusCodes()" expand="block" fill="clear" shape="round">
+                Status Hinzufügen
+            </ion-button>
+        </ion-card-content>
+        <ion-button (click)="addCategory()" expand="block">
+            Kategorie hinzufügen
+        </ion-button>
+    </ion-card>
 </ion-content>

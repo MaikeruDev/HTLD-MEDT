@@ -20,6 +20,7 @@ export class CategoriesPage implements OnInit {
 
   getCategories(){
     this.db.collection('categories').ref.onSnapshot(async (snap: any) => {
+      this.categories = []
       snap.forEach(doc => {
         this.categories.push(doc.data())
       });

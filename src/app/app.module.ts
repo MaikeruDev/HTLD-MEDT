@@ -22,10 +22,12 @@ import { NgCalendarModule } from 'ionic2-calendar';
 
 import { IonicSelectableModule } from 'ionic-selectable';
 
+import { ColorPickerModule } from 'ngx-color-picker';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [IonicSelectableModule, NgCalendarModule, ImageCropperModule, HttpClientModule, NgxQRCodeModule, BrowserModule, IonicModule.forRoot({mode: "md"}), AppRoutingModule, AngularFireStorageModule, AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],
+  imports: [ColorPickerModule, IonicSelectableModule, NgCalendarModule, ImageCropperModule, HttpClientModule, NgxQRCodeModule, BrowserModule, IonicModule.forRoot({mode: "md"}), AppRoutingModule, AngularFireStorageModule, AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

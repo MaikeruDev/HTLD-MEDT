@@ -62,3 +62,36 @@
 .event-detail{
     text-indent: -10px;
 }
+
+.my-custom-interface .select-interface-option.standard-success{
+    --color: var(--ion-color-success) !important;
+}
+
+.my-custom-interface .select-interface-option.standard-repair{
+    --color: var(--ion-color-danger) !important;
+}
+
+.my-custom-interface .select-interface-option.standard-other{
+    --color: var(--ion-color-secondary) !important;
+}
+
+div.box input{
+    background: white !important;
+}
+
+div.color-picker.open{
+    background: transparent;
+    border: none;
+}
+
+div.cursor{
+    border: #ffff solid 2px !important;
+}
+
+div.type-policy{
+    display: none;
+}
+
+div.box>div{
+    color: white !important;
+}
