@@ -49,3 +49,16 @@
 .monthview-primary-with-event{
     background-color: var(--ion-color-secondary) !important;
 }
+
+.monthview-selected.monthview-primary-with-event{
+    border: white 3px solid !important;
+    z-index: 9;
+}
+
+.monthview-eventdetail-timecolumn{
+    display: none;
+}
+
+.event-detail{
+    text-indent: -10px;
+}

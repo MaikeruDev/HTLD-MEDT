@@ -22,7 +22,7 @@
       </ion-buttons>
     </ion-item>
     <ion-list class="subList">
-      <ion-item *ngFor="let object of category.objects" (click)="openObjectInfo(object.id)">
+      <ion-item *ngFor="let object of category.objects" (click)="openObjectInfo(object.id, category.name)">
         <ion-text>{{object.name}}</ion-text>
         <ion-chip slot="end">
           <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>

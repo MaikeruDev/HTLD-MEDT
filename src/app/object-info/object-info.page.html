@@ -1,15 +1,15 @@
-<ion-header class="ion-no-border">
+<ion-header class="ion-no-border" *ngIf="object">
   <ion-toolbar>
       <ion-buttons slot="start">
           <ion-button color="dark" (click)="closeModal()" style="position: absolute;">
               <ion-icon name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
-      <ion-title color="primary" class="ion-text-center">Nikon 5100</ion-title> 
+      <ion-title color="primary" class="ion-text-center">{{object.name}}</ion-title> 
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="object">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Informationen</ion-card-title>
@@ -18,44 +18,44 @@
       <ion-item>
         <ion-text>Status:</ion-text>
         <ion-chip slot="end">
-          <ion-label color="success">Bereit</ion-label>
+          <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="schueler">
         <ion-text>Ausgeliehen von:</ion-text>
         <ion-chip slot="end">
           <ion-avatar>
-            <img src="https://avatars.dicebear.com/api/initials/Michael Prietl.svg" />
+            <img src="{{schueler.pfp}}" />
           </ion-avatar>
-          <ion-label>Michael Prietl</ion-label>
+          <ion-label>{{schueler.name}}</ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="!schueler">
+        <ion-text>Ausgeliehen von:</ion-text>
+        <ion-chip slot="end">
+          <ion-label>-</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item *ngIf="lehrer">
         <ion-text>Verliehen von:</ion-text>
         <ion-chip slot="end">
           <ion-avatar>
-            <img src="https://avatars.dicebear.com/api/initials/Julia Gruber.svg" />
+            <img src="{{lehrer.pfp}}"/>
           </ion-avatar>
-          <ion-label>Julia Gruber</ion-label>
+          <ion-label>{{lehrer.name}}</ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item>
-        <ion-text>Verliehen bis:</ion-text>
+      <ion-item *ngIf="!lehrer">
+        <ion-text>Verliehen von:</ion-text>
         <ion-chip slot="end">
-          <ion-label>27.04.2022</ion-label>
+          <ion-label>-</ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item>
-        <ion-text>Verfügbar ab:</ion-text>
-        <ion-chip slot="end">
-          <ion-label>28.04.2022</ion-label>
-        </ion-chip>
-      </ion-item>
-      <ion-item class="no-lines">
+      <ion-item class="no-lines" *ngIf="object.notes">
         <ion-text>Notizen</ion-text>
       </ion-item>
-      <ion-item>
-        <ion-label id="notes" readonly>Linse zerkratzt</ion-label>
+      <ion-item *ngIf="object.notes">
+        <ion-label id="notes" readonly>{{object.notes}}</ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -76,18 +76,60 @@
         [step]="calendar.step"
         noEventsLabel="Keine Reservierungen">
       </calendar>
-      <ionic-selectable
-        item-content
-        [(ngModel)]="port"
-        [items]="ports"
-        itemValueField="id"
-        itemTextField="name"
-        [canSearch]="true"
-        (onChange)="portChange($event)">
-      </ionic-selectable>
+
+      <ion-title color="primary">Neue Reservierung</ion-title>
+
+      <ion-item class="no-lines">
+        <ionic-selectable
+          id="iList"
+          item-content
+          [(ngModel)]="student"
+          [items]="students"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true">
+        </ionic-selectable>
+      </ion-item>
+
+      <ion-item id="open-modal">
+        <ion-button fill="clear">
+          <ion-text color="primary" style="margin-right: 10px;">
+            Startdatum
+          </ion-text>
+          <ion-icon icon="calendar"></ion-icon>
+        </ion-button>
+        <ion-label slot="end">{{startDateText}}</ion-label>
+      </ion-item>
+      <ion-item id="open-modal-end">
+        <ion-button fill="clear">
+          <ion-text color="primary" style="margin-right: 10px;">
+            Enddatum
+          </ion-text>
+          <ion-icon icon="calendar"></ion-icon>
+        </ion-button>
+        <ion-label slot="end">{{endDateText}}</ion-label>
+      </ion-item>
+            
+      <ion-modal class="dateModal" trigger="open-modal">
+        <ng-template>
+          <ion-content>
+            <ion-datetime #popoverDatetime (ionChange)="startDate = formatDateStart(popoverDatetime.value)" showDefaultButtons="true" presentation="date" doneText="Fertig" cancelText="Zurück"></ion-datetime>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+      <ion-modal class="dateModal" trigger="open-modal-end">
+        <ng-template>
+          <ion-content>
+            <ion-datetime #popoverEndDatetime (ionChange)="endDate = formatDateEnd(popoverEndDatetime.value)" showDefaultButtons="true" presentation="date" doneText="Fertig" cancelText="Zurück"></ion-datetime>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
       <ion-button (click)="addNewEvent()" expand="full">
-        Add Event
+        Hinzufügen
       </ion-button>
     </ion-card-content>
+   
   </ion-card>
 </ion-content>

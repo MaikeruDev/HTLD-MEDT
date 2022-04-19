@@ -43,7 +43,6 @@ export class HomePage implements OnInit {
             temp.id = _object.id;
             objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
-            console.log(objects)
           });
         })
         tempCategory.objects = objects
@@ -96,12 +95,13 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-  async openObjectInfo(oid){
+  async openObjectInfo(oid, category){
     const modal = await this.modalController.create({
       component: ObjectInfoPage,
       cssClass: 'my-custom-class',
       componentProps: { 
-        oid: oid
+        oid: oid,
+        category: category
       }
     });
     return await modal.present();

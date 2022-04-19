@@ -41,6 +41,7 @@ export class AuthServiceService {
                   pfp: "https://avatars.dicebear.com/api/initials/" + name + ".svg",
                   email: email.toLowerCase(),
                   uid: user.uid,
+                  role: "student",
                   loginToken: this.encrypt(email.toLowerCase() + "&" + password)
                 }).then( res => {
                   location.reload();

@@ -23,6 +23,64 @@ div>ion-list.event-detail-container.md.list-md.hydrated{
     --ion-border-color: transparent;
 }
 
+#iList{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+}
+
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+}
+
+ion-datetime {
+    height: auto;
+    width: auto;
+
+    max-width: 350px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    grid-gap: 0 10px;
+}
+
+.dateModal {
+    --width: 290px;
+    --height: 400px;
+    --border-radius: 8px;
+}
+
+.dateModal ion-datetime {
+    height: 400px;
+}
+
+ion-list > ion-item-group > ion-item{
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+}
+
+ionic-selectable-modal > ion-content > ion-list.list-md {
+    background-color: transparent; 
+    box-shadow: none;
+    --background: transparent;
+}
+
+ion-title{
+    padding-left: 5px
+}
+
 @media only screen and (min-width: 850px) {
     ion-card, ion-list, ion-item{
         background-color: transparent; 
