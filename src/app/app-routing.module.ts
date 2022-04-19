@@ -46,6 +46,14 @@ const routes: Routes = [
     path: 'object-info',
     loadChildren: () => import('./object-info/object-info.module').then( m => m.ObjectInfoPageModule)
   },
+  {
+    path: 'categories',
+    loadChildren: () => import('./categories/categories.module').then( m => m.CategoriesPageModule)
+  },
+  {
+    path: 'create-category',
+    loadChildren: () => import('./create-category/create-category.module').then( m => m.CreateCategoryPageModule)
+  },
 ];
 
 @NgModule({

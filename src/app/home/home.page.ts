@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LoadingController, ModalController } from '@ionic/angular';
+import { CategoriesPage } from '../categories/categories.page';
 import { ObjectInfoPage } from '../object-info/object-info.page';
 import { ProfilePage } from '../profile/profile.page';
 import { QrcodePage } from '../qrcode/qrcode.page';
@@ -103,6 +104,14 @@ export class HomePage implements OnInit {
         oid: oid,
         category: category
       }
+    });
+    return await modal.present();
+  }
+
+  async openCategories() {
+    const modal = await this.modalController.create({
+      component: CategoriesPage,
+      cssClass: 'my-custom-class'
     });
     return await modal.present();
   }

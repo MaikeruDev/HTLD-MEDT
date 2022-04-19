@@ -138,7 +138,7 @@ export class ObjectInfoPage implements OnInit {
       end.setMinutes(end.getMinutes() + 60);
   
       let event = {
-        title: 'Ausgeliehen von: ' + this.student.name /* start.getMinutes() */,
+        title: 'Reserviert von: ' + this.student.name /* start.getMinutes() */,
         startTime: start,
         endTime: end,
         allDay: true,
@@ -165,7 +165,7 @@ export class ObjectInfoPage implements OnInit {
   async onEventSelected(event){
     /* console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title) */
       const actionSheet = await this.actionSheetController.create({
-        header: 'Reservierung',
+        header: event.title,
         cssClass: 'my-custom-class',
         buttons: [{
           text: 'Löschen',
@@ -183,7 +183,7 @@ export class ObjectInfoPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            
           }
         }]
       });

@@ -1,0 +1,43 @@
+ion-header, ion-avatar{
+    font-family: 'Noto Sans';
+
+
+ion-toolbar, ion-header{
+    background-color: transparent;
+    --background: transparent;        
+}
+
+.no-lines{
+    --ion-border-color: transparent;
+}}
+
+ion-card, ion-list, ion-item{
+    background-color: #181818; 
+    box-shadow: none;
+    --background: #181818;
+}
+
+
+@media only screen and (min-width: 850px) {
+    ion-card{
+      margin-left: 35vw;
+      margin-right: 35vw;
+    }
+
+    ion-list{
+      margin-left: 25vw;
+      margin-right: 25vw;
+    }
+
+    ion-toolbar{
+        padding-left: 25vw;
+        padding-right: 25vw;
+    }
+
+    ion-card, ion-list, ion-item{
+      background-color: transparent; 
+      box-shadow: none;
+      --background: transparent;/* 
+      --ion-border-color: transparent; */
+    } 
+  }
