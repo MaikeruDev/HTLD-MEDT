@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AlertController, ModalController } from '@ionic/angular';    
+import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';    
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
 import { AuthServiceService } from '../services/auth-service.service';
 
@@ -14,7 +14,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 
 export class ObjectInfoPage implements OnInit {
 
-  constructor(public authService: AuthServiceService, public modalController: ModalController, private db: AngularFirestore, public alertController: AlertController) {
+  constructor(public actionSheetController: ActionSheetController, public authService: AuthServiceService, public modalController: ModalController, private db: AngularFirestore, public alertController: AlertController) {
   }
 
   eventSource = [];
@@ -162,8 +162,32 @@ export class ObjectInfoPage implements OnInit {
     this.viewTitle = title;
   }
   
-  onEventSelected(event){
+  async onEventSelected(event){
     /* console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title) */
+      const actionSheet = await this.actionSheetController.create({
+        header: 'Reservierung',
+        cssClass: 'my-custom-class',
+        buttons: [{
+          text: 'Löschen',
+          role: 'destructive',
+          icon: 'trash',
+          id: 'delete-button',
+          data: {
+            type: 'delete'
+          },
+          handler: () => {
+            this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).collection('reservierungen').doc(event.id).delete();
+          }
+        }, {
+          text: 'Abbrechen',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
+      });
+      await actionSheet.present();
   }
 
   onTimeSelected(ev){
