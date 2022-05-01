@@ -26,6 +26,7 @@ export class AuthServiceService {
       var last_name = unformatted_name.substring(unformatted_name.indexOf(".") + 1)
       var name = this.capitalizeFirstLetter(first_name) + " " + this.capitalizeFirstLetter(last_name);
       var mailProvider = email.substring(email.length - 23);
+      var lmailProvider = email.substring(email.length - 15);
       if(mailProvider == "@student.htldornbirn.at" && first_name && last_name){
         return new Promise<any>((resolve, reject) => {
           this.afAuth.createUserWithEmailAndPassword(email, password).then(credential => {
@@ -58,6 +59,52 @@ export class AuthServiceService {
               await alert.present();
             }
           )
+        })
+      }
+      else if(lmailProvider == "@htldornbirn.at" && first_name && last_name){
+        this.db.collection('teachers').ref.get().then(async (_teachers: any) => {
+          _teachers.forEach(_teacher => {
+            var vname = _teacher.data().vname
+            var nname = _teacher.data().nname
+            var email = _teacher.data().email
+            if(vname.toLowerCase() == first_name.toLowerCase() && nname.toLowerCase() == last_name.toLowerCase() && email.toLowerCase() == first_name.toLowerCase() + "." + last_name.toLowerCase() + lmailProvider){
+              return new Promise<any>((resolve, reject) => {
+                this.afAuth.createUserWithEmailAndPassword(email, password).then(credential => {
+                  credential.user.updateProfile({
+                    displayName: name,
+                  })
+                }).then(
+                  async res => {
+                    await this.afAuth.user.subscribe(user => {
+      
+                      this.db.collection("users/").doc(user.uid).set({
+                        name: name,
+                        pfp: "https://avatars.dicebear.com/api/initials/" + name + ".svg",
+                        email: email.toLowerCase(),
+                        uid: user.uid,
+                        role: "teacher",
+                        loginToken: this.encrypt(email.toLowerCase() + "&" + password)
+                      }).then( res => {
+                        location.reload();
+                      })
+                    })
+                  },
+                  async err => {
+                    const alert = await this.alertController.create({
+                      header: "Oopsie",
+                      message: err.message,
+                      buttons: ["RETRY"]
+                    })
+      
+                    await alert.present();
+                  }
+                )
+              })
+            }
+            else{
+              this.alert("Fehler", "Die eingegebene E-Mail stimmt mit keinem Lehrerkonto überein.", "Bitte überprüfe deine Eingaben.", "OK");
+            }
+          });
         })
       }
       else{
