@@ -8,12 +8,15 @@ import { EditCategoryPageRoutingModule } from './edit-category-routing.module';
 
 import { EditCategoryPage } from './edit-category.page';
 
+import { ColorPickerModule } from 'ngx-color-picker';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditCategoryPageRoutingModule
+    EditCategoryPageRoutingModule,
+    ColorPickerModule
   ],
   declarations: [EditCategoryPage]
 })

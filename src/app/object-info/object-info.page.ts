@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';    
+import { ActionSheetController, AlertController, ModalController, PopoverController } from '@ionic/angular';    
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
 import { Step } from 'ionic2-calendar/calendar';
+import { EditObjectPage } from '../edit-object/edit-object.page';
 import { AuthServiceService } from '../services/auth-service.service';
 
 
@@ -15,7 +16,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 
 export class ObjectInfoPage implements OnInit {
 
-  constructor(public actionSheetController: ActionSheetController, public authService: AuthServiceService, public modalController: ModalController, private db: AngularFirestore, public alertController: AlertController) {
+  constructor(public popoverController: PopoverController, public actionSheetController: ActionSheetController, public authService: AuthServiceService, public modalController: ModalController, public db: AngularFirestore, public alertController: AlertController) {
   }
 
   eventSource = [];
@@ -190,6 +191,98 @@ export class ObjectInfoPage implements OnInit {
         }]
       });
       await actionSheet.present();
+  }
+
+  async editObject(object){
+    this.popoverController.dismiss();
+    const modal = await this.modalController.create({
+      component: EditObjectPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        category: this.category,
+        oid: object.oid
+      }
+    });
+    return await modal.present();
+  }
+
+  async deactivateObject(){
+    this.popoverController.dismiss();
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Achtung',
+      message: 'Willst du <strong>' + this.object.name + '</strong> wirklich deaktivieren?',
+      buttons: [
+        {
+          text: 'Nein',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button'
+        }, {
+          text: 'Ja',
+          id: 'confirm-button',
+          handler: () => {
+            this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).update({
+              deactivated: true
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async activateObject(){
+    this.popoverController.dismiss();
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Achtung',
+      message: 'Willst du <strong>' + this.object.name + '</strong> wirklich aktivieren?',
+      buttons: [
+        {
+          text: 'Nein',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button'
+        }, {
+          text: 'Ja',
+          id: 'confirm-button',
+          handler: () => {
+            this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).update({
+              deactivated: false
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async deleteObject(){
+    this.popoverController.dismiss();
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Achtung',
+      message: 'Willst du <strong>' + this.object.name + '</strong> wirklich löschen?',
+      buttons: [
+        {
+          text: 'Nein',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button'
+        }, {
+          text: 'Ja',
+          id: 'confirm-button',
+          handler: () => {
+            this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).delete()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   onTimeSelected(ev){

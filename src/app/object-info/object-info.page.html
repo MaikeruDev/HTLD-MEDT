@@ -1,11 +1,36 @@
 <ion-header class="ion-no-border" *ngIf="object">
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-button color="dark" (click)="closeModal()" style="position: absolute;">
+          <ion-button color="dark" (click)="closeModal()">
               <ion-icon name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
       <ion-title color="primary" class="ion-text-center">{{object.name}}</ion-title> 
+      <ion-buttons slot="end">
+        <ion-button color="dark" id="trigger-button">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </ion-button>
+        <ion-popover trigger="trigger-button">
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item [button]="true" (click)="editObject(object)" [detail]="false"  style="background-color: transparent; box-shadow: none; --background: transparent;">
+                  <ion-label>Bearbeiten</ion-label>
+                </ion-item>
+                <ion-item lines="none" *ngIf="!object.deactivated" (click)="deactivateObject()" [button]="true" [detail]="false"  style="background-color: transparent; box-shadow: none; --background: transparent;">
+                  <ion-label>Deaktivieren</ion-label>
+                </ion-item>
+                <ion-item lines="none" *ngIf="object.deactivated" (click)="activateObject()" [button]="true" [detail]="false"  style="background-color: transparent; box-shadow: none; --background: transparent;">
+                  <ion-label>Aktivieren</ion-label>
+                </ion-item>
+                <ion-item lines="none" (click)="deleteObject()" [button]="true" [detail]="false"  style="background-color: transparent; box-shadow: none; --background: transparent;">
+                  <ion-label>Löschen</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

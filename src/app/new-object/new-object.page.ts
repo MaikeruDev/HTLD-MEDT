@@ -31,7 +31,7 @@ export class NewObjectPage implements OnInit {
   }
 
   async addItem(){
-    if(this.name == "" || !this.name || this.notes == "" || !this.notes || this.colorCode == "" || !this.colorCode){
+    if(this.name == "" || !this.name  || this.colorCode == "" || !this.colorCode){
       const alert = await this.alertController.create({
         header: "Oopsie",
         message: "Bitte alle Felder ausfüllen.",

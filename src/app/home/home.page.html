@@ -22,12 +22,20 @@
       </ion-buttons>
     </ion-item>
     <ion-list class="subList">
-      <ion-item *ngFor="let object of category.objects" (click)="openObjectInfo(object.id, category.cid)">
-        <ion-text>{{object.name}}</ion-text>
-        <ion-chip slot="end">
-          <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
-        </ion-chip>
-      </ion-item>
+      <div *ngFor="let object of category.objects" (click)="openObjectInfo(object.id, category.cid)">
+        <ion-item *ngIf="!object.deactivated">
+          <ion-text>{{object.name}}</ion-text>
+          <ion-chip slot="end">
+            <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
+          </ion-chip>
+        </ion-item>
+        <ion-item *ngIf="object.deactivated">
+          <ion-text style="color: grey;">{{object.name}} (Deaktiviert)</ion-text>
+          <ion-chip slot="end">
+            <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
+          </ion-chip>
+        </ion-item>
+      </div>
     </ion-list>
   </ion-card>
   
@@ -39,6 +47,7 @@
       <ion-fab-button (click)="authService.signOut()"><ion-icon name="exit"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openQRCode()"><ion-icon name="qr-code"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openCategories()"><ion-icon name="apps"></ion-icon></ion-fab-button>
+      <ion-fab-button (click)="openTeachers()"><ion-icon name="people"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openProfile()"><ion-icon name="person"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
@@ -58,12 +67,20 @@
       </ion-buttons>
     </ion-item>
     <ion-list class="subList">
-      <ion-item *ngFor="let object of category.objects" (click)="openObjectInfo(object.id, category.cid)">
-        <ion-text>{{object.name}}</ion-text>
-        <ion-chip slot="end">
-          <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
-        </ion-chip>
-      </ion-item>
+      <div *ngFor="let object of category.objects" (click)="openObjectInfo(object.id, category.cid)">
+        <ion-item *ngIf="!object.deactivated">
+          <ion-text>{{object.name}}</ion-text>
+          <ion-chip slot="end">
+            <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
+          </ion-chip>
+        </ion-item>
+        <ion-item *ngIf="object.deactivated">
+          <ion-text style="color: grey;">{{object.name}} (Deaktiviert)</ion-text>
+          <ion-chip slot="end">
+            <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
+          </ion-chip>
+        </ion-item>
+      </div>
     </ion-list>
   </ion-card>
   
@@ -75,6 +92,7 @@
       <ion-fab-button (click)="authService.signOut()"><ion-icon name="exit"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openQRCode()"><ion-icon name="qr-code"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openCategories()"><ion-icon name="apps"></ion-icon></ion-fab-button>
+      <ion-fab-button (click)="openTeachers()"><ion-icon name="people"></ion-icon></ion-fab-button>
       <ion-fab-button (click)="openProfile()"><ion-icon name="person"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>

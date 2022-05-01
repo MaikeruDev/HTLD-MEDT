@@ -1,0 +1,24 @@
+ion-card, ion-list, ion-item{
+    background-color: #181818; 
+    box-shadow: none;
+    --background: #181818;
+}
+
+ion-toolbar, ion-header{
+    background-color: transparent;
+    --background: transparent;        
+}
+
+.no-lines{
+    --ion-border-color: transparent;
+}
+
+
+@media only screen and (min-width: 850px) {
+    ion-card, ion-list, ion-item{
+        background-color: transparent; 
+        box-shadow: none;
+        --background: transparent;/* 
+        --ion-border-color: transparent; */
+    } 
+}

@@ -8,6 +8,7 @@ import { ObjectInfoPage } from '../object-info/object-info.page';
 import { ProfilePage } from '../profile/profile.page';
 import { QrcodePage } from '../qrcode/qrcode.page';
 import { AuthServiceService } from '../services/auth-service.service';
+import { TeachersPage } from '../teachers/teachers.page';
 
 @Component({
   selector: 'app-home',
@@ -200,6 +201,15 @@ export class HomePage implements OnInit {
     modal.onDidDismiss().then(data => {
       this.refresh("")
     });
+    return await modal.present();
+  }
+
+  async openTeachers(){
+    const modal = await this.modalController.create({
+      component: TeachersPage,
+      cssClass: 'my-custom-class'
+    });
+    
     return await modal.present();
   }
 
