@@ -35,6 +35,7 @@ export class ObjectInfoPage implements OnInit {
   category;
 
   uid;
+  role;
 
   students = [];
   student = {id: -1, name: "Schüler auswählen", uid: ""};
@@ -50,8 +51,11 @@ export class ObjectInfoPage implements OnInit {
   schueler: any;
 
   async ngOnInit() {
-    this.authService.userDetails().subscribe((user: any) => {
+    this.authService.userDetails().subscribe(async (user: any) => {
       this.uid = user.uid
+      this.db.collection('users').doc(this.uid).ref.get().then(async (_user: any) => {
+        this.role = _user.data().role
+      })
     })
     this.getObjectInfos()
     this.getStudents()

@@ -6,7 +6,7 @@
           </ion-button>
       </ion-buttons>
       <ion-title color="primary" class="ion-text-center">{{object.name}}</ion-title> 
-      <ion-buttons slot="end">
+      <ion-buttons slot="end" *ngIf="role == 'teacher'">
         <ion-button color="dark" id="trigger-button">
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </ion-button>
@@ -103,9 +103,9 @@
         noEventsLabel="Keine Reservierungen">
       </calendar>
 
-      <ion-title color="primary">Neue Reservierung</ion-title>
+      <ion-title *ngIf="role == 'teacher'" color="primary">Neue Reservierung</ion-title>
 
-      <ion-item class="no-lines">
+      <ion-item class="no-lines" *ngIf="role == 'teacher'">
         <ionic-selectable
           id="iList"
           item-content
@@ -117,7 +117,7 @@
         </ionic-selectable>
       </ion-item>
 
-      <ion-item id="open-modal">
+      <ion-item id="open-modal" *ngIf="role == 'teacher'">
         <ion-button fill="clear">
           <ion-text color="primary" style="margin-right: 10px;">
             Startdatum
@@ -126,7 +126,7 @@
         </ion-button>
         <ion-label slot="end">{{startDateText}}</ion-label>
       </ion-item>
-      <ion-item id="open-modal-end">
+      <ion-item id="open-modal-end" *ngIf="role == 'teacher'">
         <ion-button fill="clear">
           <ion-text color="primary" style="margin-right: 10px;">
             Enddatum
@@ -152,7 +152,7 @@
         </ng-template>
       </ion-modal>
 
-      <ion-button (click)="addNewEvent()" expand="full">
+      <ion-button (click)="addNewEvent()" expand="full" *ngIf="role == 'teacher'">
         Hinzufügen
       </ion-button>
     </ion-card-content>

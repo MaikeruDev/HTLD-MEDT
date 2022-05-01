@@ -18,7 +18,7 @@ export class NewObjectPage implements OnInit {
   notes;
   colorCode;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.statusCodes = []
     this.db.collection('categories').doc(this.category).ref.get().then(async (cat: any) => {
       console.log(cat.data())
@@ -41,6 +41,9 @@ export class NewObjectPage implements OnInit {
       await alert.present();
     }
     else{
+      if(this.notes == "" || !this.notes){
+        this.notes = " "
+      }
       this.db.collection('categories').doc(this.category).collection('Objects').add({
         color: this.statusCodes[this.colorCode].color,
         name: this.name,
