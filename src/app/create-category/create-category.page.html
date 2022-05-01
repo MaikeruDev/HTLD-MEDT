@@ -52,7 +52,7 @@
                 </ion-select>
             </ion-item>
             <ion-item *ngIf="colorCode == 'own'" style="height: 315px;" lines="none" >
-                <span class="color-picker" [cpOutputFormat]="hex" [cpAlphaChannel]="hex6" [(colorPicker)]="color" [cpDialogDisplay]="popover" [cpToggle]="true"></span>
+                <span class="color-picker" [cpOutputFormat]="hex" [cpAlphaChannel]="hex6" [(colorPicker)]="color" [cpDialogDisplay]="inline" [cpToggle]="true"></span>
             </ion-item>
             <ion-button (click)="addStatusCodes()" expand="block" fill="clear" shape="round">
                 Status Hinzufügen

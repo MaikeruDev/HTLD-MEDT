@@ -20,13 +20,11 @@ export class NewObjectPage implements OnInit {
 
   ngOnInit() {
     this.statusCodes = []
-    console.log(this.category)
     this.db.collection('categories').doc(this.category).ref.get().then(async (cat: any) => {
       console.log(cat.data())
       var _statusCodes = cat.data().statusCodes;
       for (let key in _statusCodes) {
         let value = _statusCodes[key]
-        console.log(key, value)
         this.statusCodes.push({status: key, color: value}) 
       }
     })

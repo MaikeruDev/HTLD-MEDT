@@ -25,7 +25,6 @@ export class EditCategoryPage implements OnInit {
       var _statusCodes = doc.data().statusCodes;
       for (let key in _statusCodes) {
         let value = _statusCodes[key]
-        console.log(key, value)
         this.statusCodes.push({status: key, color: value}) 
       }
     })

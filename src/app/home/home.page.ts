@@ -19,11 +19,28 @@ export class HomePage implements OnInit {
   constructor(public afAuth: AngularFireAuth, public modalController: ModalController, private db: AngularFirestore, public loadingController: LoadingController, public authService: AuthServiceService) {}
 
   categories: any = [];
+  myCategories: any = [];
 
   async ngOnInit() {
+    this.authService.userDetails().subscribe(async (user: any) => {
+      this.uid = user.uid
+    })
     await this.clearAll();
     await this.activateLoader();
     await this.loadCategories();
+  }
+
+  all: any = true;
+
+  uid: any;
+
+  segmentChanged(event){
+    if(event.detail.value == "All"){
+      this.all = true;
+    }
+    else{
+      this.all = false;
+    }
   }
 
   async activateLoader(){
@@ -39,17 +56,37 @@ export class HomePage implements OnInit {
       _categories.forEach(async _category => {
         var tempCategory = _category.data();
         tempCategory.cid = _category.id;
+        
+        var _tempCategory = _category.data();
+        _tempCategory.cid = _category.id;
         var objects = [];
+        var myObjects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
             var temp = _object.data();
             temp.id = _object.id;
+            this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "==", this.uid).get().then(async (_docs: any) => {
+              _docs.forEach(_doc => {
+                var now = new Date()
+                var startTime = _doc.data().startTime
+                var endTime = _doc.data().endTime
+                if(startTime.toDate() < now && endTime.toDate() > now){
+                  var _temp = _doc.data()
+                  _temp.oid = _doc.id
+                  myObjects.push(temp)
+                  myObjects.sort((a,b) => a.status.localeCompare(b.status));
+                }
+              });
+            })
             objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
           });
         })
         tempCategory.objects = objects
         this.categories.push(tempCategory)
+        
+        _tempCategory.objects = myObjects
+        this.myCategories.push(_tempCategory)
       });
     }).then(res => {
       this.loadingController.dismiss()
@@ -58,6 +95,7 @@ export class HomePage implements OnInit {
 
   async clearAll(){
     this.categories = []
+    this.myCategories = []
   }
 
   async refresh(event){
@@ -66,17 +104,37 @@ export class HomePage implements OnInit {
       _categories.forEach(async _category => {
         var tempCategory = _category.data();
         tempCategory.cid = _category.id;
+
+        var _tempCategory = _category.data();
+        _tempCategory.cid = _category.id;
         var objects = [];
+        var myObjects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
             var temp = _object.data();
             temp.id = _object.id;
+            this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "==", this.uid).get().then(async (_docs: any) => {
+              _docs.forEach(_doc => {
+                var now = new Date()
+                var startTime = _doc.data().startTime
+                var endTime = _doc.data().endTime
+                if(startTime.toDate() < now && endTime.toDate() > now){
+                  var _temp = _doc.data()
+                  _temp.oid = _doc.id
+                  myObjects.push(temp)
+                  myObjects.sort((a,b) => a.status.localeCompare(b.status));
+                }
+              });
+            })
             objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
           });
         })
         tempCategory.objects = objects
         this.categories.push(tempCategory)
+        
+        _tempCategory.objects = myObjects
+        this.myCategories.push(_tempCategory)
       });
     }).then(res => {
        try {
@@ -86,6 +144,8 @@ export class HomePage implements OnInit {
        }
     })
   }
+
+  myObjects: any = []
 
   async openQRCode(){
     const modal = await this.modalController.create({
@@ -104,7 +164,6 @@ export class HomePage implements OnInit {
   }
 
   async openObjectInfo(oid, category){
-    console.log(oid, category)
     const modal = await this.modalController.create({
       component: ObjectInfoPage,
       cssClass: 'my-custom-class',
