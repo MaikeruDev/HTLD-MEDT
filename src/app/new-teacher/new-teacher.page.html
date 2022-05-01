@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="position: absolute;">
+      <ion-button (click)="closeModal()">Zurück</ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-text-center">Neue Lehrperson</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Vorname</ion-card-title>
+        <ion-item lines="none">
+            <ion-input [(ngModel)]="vname" placeholder="Max"></ion-input>
+        </ion-item>
+        <ion-card-title color="primary">Nachname</ion-card-title>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="nname" placeholder="Mustermann"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="addTeacher()" >
+          <ion-icon slot="end" name="add"></ion-icon>
+          Lehrperson hinzufügen
+        </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

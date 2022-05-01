@@ -13,6 +13,9 @@ ion-toolbar, ion-header{
     --ion-border-color: transparent;
 }
 
+ion-title{
+    padding-right: 0;
+}
 
 @media only screen and (min-width: 850px) {
     ion-card, ion-list, ion-item{

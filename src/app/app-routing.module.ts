@@ -78,7 +78,11 @@ const routes: Routes = [
     path: 'teachers',
     loadChildren: () => import('./teachers/teachers.module').then( m => m.TeachersPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },  {
+    path: 'new-teacher',
+    loadChildren: () => import('./new-teacher/new-teacher.module').then( m => m.NewTeacherPageModule)
   },
+
 
 ];
 

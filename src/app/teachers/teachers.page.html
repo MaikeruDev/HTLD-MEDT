@@ -1,9 +1,26 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>teachers</ion-title>
+    <ion-buttons slot="start" style="position: absolute;">
+      <ion-button (click)="closeModal()">Zurück</ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-text-center">Lehrpersonen</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngFor="let teacher of teachers">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label>{{ teacher.vname + " " + teacher.nname }}</ion-label>
+        <ion-button slot="end" fill="none" (click)="openMenu(teacher.id, teacher.vname + ' ' + teacher.nname)">
+          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-card class="transparent">
+    <ion-button (click)="newTeacher()" expand="block" fill="outline" shape="round">
+      Lehrperson hinzufügen
+    </ion-button>
+  </ion-card>
 </ion-content>
