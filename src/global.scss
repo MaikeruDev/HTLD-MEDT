@@ -39,6 +39,7 @@
 .monthview-current{
     background-color: transparent !important;
     border: var(--ion-color-primary) 3px solid !important;
+    z-index: 9;
     color: white !important;
 }
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';    
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
+import { Step } from 'ionic2-calendar/calendar';
 import { AuthServiceService } from '../services/auth-service.service';
 
 
@@ -23,7 +24,8 @@ export class ObjectInfoPage implements OnInit {
   calendar = {
     mode: 'month',
     currentDate: new Date(),
-    step: '30'
+    step: 30 as Step,
+    locale: 'de-DE'
   }
   selectedDate = new Date();
 

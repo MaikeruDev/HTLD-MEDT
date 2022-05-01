@@ -53,7 +53,19 @@ const routes: Routes = [
   {
     path: 'create-category',
     loadChildren: () => import('./create-category/create-category.module').then( m => m.CreateCategoryPageModule)
+  },  {
+    path: 'edit-category',
+    loadChildren: () => import('./edit-category/edit-category.module').then( m => m.EditCategoryPageModule)
   },
+  {
+    path: 'edit-object',
+    loadChildren: () => import('./edit-object/edit-object.module').then( m => m.EditObjectPageModule)
+  },
+  {
+    path: 'new-object',
+    loadChildren: () => import('./new-object/new-object.module').then( m => m.NewObjectPageModule)
+  },
+
 ];
 
 @NgModule({

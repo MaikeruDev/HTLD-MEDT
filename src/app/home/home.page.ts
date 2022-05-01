@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { CategoriesPage } from '../categories/categories.page';
+import { NewObjectPage } from '../new-object/new-object.page';
 import { ObjectInfoPage } from '../object-info/object-info.page';
 import { ProfilePage } from '../profile/profile.page';
 import { QrcodePage } from '../qrcode/qrcode.page';
@@ -37,6 +38,7 @@ export class HomePage implements OnInit {
     await this.db.collection('categories').ref.get().then(async (_categories: any) => {
       _categories.forEach(async _category => {
         var tempCategory = _category.data();
+        tempCategory.cid = _category.id;
         var objects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
@@ -63,6 +65,7 @@ export class HomePage implements OnInit {
     await this.db.collection('categories').ref.get().then(async (_categories: any) => {
       _categories.forEach(async _category => {
         var tempCategory = _category.data();
+        tempCategory.cid = _category.id;
         var objects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
@@ -76,7 +79,11 @@ export class HomePage implements OnInit {
         this.categories.push(tempCategory)
       });
     }).then(res => {
-      event.target.complete();
+       try {
+        event.target.complete();
+       } catch (error) {
+         
+       }
     })
   }
 
@@ -97,6 +104,7 @@ export class HomePage implements OnInit {
   }
 
   async openObjectInfo(oid, category){
+    console.log(oid, category)
     const modal = await this.modalController.create({
       component: ObjectInfoPage,
       cssClass: 'my-custom-class',
@@ -105,6 +113,23 @@ export class HomePage implements OnInit {
         category: category
       }
     });
+    modal.onDidDismiss().then(data => {
+      this.refresh("")
+    });
+    return await modal.present();
+  }
+
+  async addObject(category){
+    const modal = await this.modalController.create({
+      component: NewObjectPage,
+      cssClass: 'my-custom-class',
+      componentProps: { 
+        category: category
+      }
+    });
+    modal.onDidDismiss().then(data => {
+      this.refresh("")
+    });
     return await modal.present();
   }
 
@@ -112,6 +137,9 @@ export class HomePage implements OnInit {
     const modal = await this.modalController.create({
       component: CategoriesPage,
       cssClass: 'my-custom-class'
+    });
+    modal.onDidDismiss().then(data => {
+      this.refresh("")
     });
     return await modal.present();
   }

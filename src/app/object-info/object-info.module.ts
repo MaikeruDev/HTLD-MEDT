@@ -10,6 +10,10 @@ import { ObjectInfoPage } from './object-info.page';
 
 import { NgCalendarModule } from 'ionic2-calendar';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe);
 
 @NgModule({
   imports: [
@@ -20,6 +24,9 @@ import { IonicSelectableModule } from 'ionic-selectable';
     NgCalendarModule,
     IonicSelectableModule
   ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de-DE' }
+],
   declarations: [ObjectInfoPage]
 })
 export class ObjectInfoPageModule {}
