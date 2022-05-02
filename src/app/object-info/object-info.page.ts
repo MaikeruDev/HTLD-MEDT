@@ -281,6 +281,7 @@ export class ObjectInfoPage implements OnInit {
           id: 'confirm-button',
           handler: () => {
             this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).delete()
+            this.closeModal()
           }
         }
       ]

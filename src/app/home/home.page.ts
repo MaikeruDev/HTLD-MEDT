@@ -109,9 +109,11 @@ export class HomePage implements OnInit {
         })
         tempCategory.objects = objects
         this.categories.push(tempCategory)
+        this.categories.sort((a,b) => a.name.localeCompare(b.name));
         
         _tempCategory.objects = myObjects
         this.myCategories.push(_tempCategory)
+        this.myCategories.sort((a,b) => a.name.localeCompare(b.name));
       });
     }).then(res => {
       this.loadingController.dismiss()
@@ -176,9 +178,11 @@ export class HomePage implements OnInit {
         })
         tempCategory.objects = objects
         this.categories.push(tempCategory)
+        this.categories.sort((a,b) => a.name.localeCompare(b.name));
         
         _tempCategory.objects = myObjects
         this.myCategories.push(_tempCategory)
+        this.myCategories.sort((a,b) => a.name.localeCompare(b.name));
       });
     }).then(res => {
        try {

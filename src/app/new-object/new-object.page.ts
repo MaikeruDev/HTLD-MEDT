@@ -16,7 +16,12 @@ export class NewObjectPage implements OnInit {
 
   name;
   notes;
+  invnr;
   colorCode;
+
+  customPopoverOptions: any = {
+    cssClass: 'my-custom-interface',
+  };
 
   async ngOnInit() {
     this.statusCodes = []
@@ -48,6 +53,7 @@ export class NewObjectPage implements OnInit {
         color: this.statusCodes[this.colorCode].color,
         name: this.name,
         notes: this.notes,
+        invnr: this.invnr,
         status: this.statusCodes[this.colorCode].status
       }).then(async(docRef: any) => {
         this.db.collection('categories').doc(this.category).collection('Objects').doc(docRef.id).update({

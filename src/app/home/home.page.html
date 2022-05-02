@@ -29,7 +29,7 @@
             <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
           </ion-chip>
         </ion-item>
-        <ion-item *ngIf="object.deactivated">
+        <ion-item *ngIf="object.deactivated && role == 'teacher'">
           <ion-text style="color: grey;">{{object.name}} (Deaktiviert)</ion-text>
           <ion-chip slot="end">
             <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
@@ -74,7 +74,7 @@
             <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>
           </ion-chip>
         </ion-item>
-        <ion-item *ngIf="object.deactivated">
+        <ion-item *ngIf="object.deactivated && role == 'teacher'">
           <ion-text style="color: grey;">{{object.name}} (Deaktiviert)</ion-text>
           <ion-chip slot="end">
             <ion-label [ngStyle]="{color: object.color}">{{object.status}}</ion-label>

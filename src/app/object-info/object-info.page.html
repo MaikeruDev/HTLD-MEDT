@@ -76,6 +76,12 @@
           <ion-label>-</ion-label>
         </ion-chip>
       </ion-item>
+      <ion-item>
+        <ion-text>Inventarnummer:</ion-text>
+        <ion-chip slot="end">
+          <ion-label>{{object.invnr}}</ion-label>
+        </ion-chip>
+      </ion-item>
       <ion-item class="no-lines" *ngIf="object.notes">
         <ion-text>Notizen</ion-text>
       </ion-item>

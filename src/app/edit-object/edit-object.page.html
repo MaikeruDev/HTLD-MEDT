@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-content>
       <ion-card-title color="primary">Name</ion-card-title>
         <ion-item lines="none">
@@ -29,5 +29,46 @@
           Objekt speichern
         </ion-button>
     </ion-card-content>
+  </ion-card> -->
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Name</ion-card-title>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="name" placeholder="z.B. Nikon 5100"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Inventar Nr.</ion-card-title>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="invnr" placeholder="z.B. 12"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Notizen</ion-card-title>
+      <ion-item lines="none">
+        <ion-textarea [(ngModel)]="notes" placeholder="z.B. Abdeckung fehlt..."></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Status</ion-card-title>
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="colorCode" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Auswählen" style="margin: 0;">
+          <ion-select-option *ngFor="let item of statusCodes; let i = index" [attr.data-index]="i" class="standard-success" value="{{i}}">{{item.status}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card style="background-color: transparent;
+  --background: transparent; ">
+    <ion-button expand="block" (click)="saveObject()" >
+      <ion-icon slot="end" name="add"></ion-icon>
+      Objekt speichern
+    </ion-button>
   </ion-card>
 </ion-content>

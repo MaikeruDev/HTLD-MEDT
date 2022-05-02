@@ -11,13 +11,21 @@
   <ion-card>
     <ion-card-content>
       <ion-card-title color="primary">Vorname</ion-card-title>
-        <ion-item lines="none">
-            <ion-input [(ngModel)]="vname" placeholder="Max"></ion-input>
-        </ion-item>
-        <ion-card-title color="primary">Nachname</ion-card-title>
-        <ion-item lines="none">
-          <ion-input [(ngModel)]="nname" placeholder="Mustermann"></ion-input>
-        </ion-item>
+      <ion-item lines="none">
+          <ion-input [(ngModel)]="vname" placeholder="Max"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Nachname</ion-card-title>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="nname" placeholder="Mustermann"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="transparent" style="margin-top: 0">
+    <ion-card-content>
         <ion-button expand="block" (click)="addTeacher()" >
           <ion-icon slot="end" name="add"></ion-icon>
           Lehrperson hinzufügen
