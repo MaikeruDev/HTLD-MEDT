@@ -82,11 +82,17 @@
           <ion-label>{{object.invnr}}</ion-label>
         </ion-chip>
       </ion-item>
+      <ion-item>
+        <ion-text>Gerätenummer:</ion-text>
+        <ion-chip slot="end">
+          <ion-label>{{object.grnr}}</ion-label>
+        </ion-chip>
+      </ion-item>
       <ion-item class="no-lines" *ngIf="object.notes">
         <ion-text>Notizen</ion-text>
       </ion-item>
       <ion-item *ngIf="object.notes">
-        <ion-label id="notes" readonly>{{object.notes}}</ion-label>
+        <ion-label id="notes" [innerHTML]="notes" readonly></ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>

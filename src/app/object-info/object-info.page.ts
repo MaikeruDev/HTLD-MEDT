@@ -38,7 +38,7 @@ export class ObjectInfoPage implements OnInit {
   role;
 
   students = [];
-  student = {id: -1, name: "Schüler auswählen", uid: ""};
+  student = {id: -1, name: "Person auswählen", uid: ""};
 
   startDate;
   startDateText;
@@ -60,6 +60,43 @@ export class ObjectInfoPage implements OnInit {
     this.getObjectInfos()
     this.getStudents()
     this.loadCalendar();
+  }
+
+notes;
+
+  async URLReplacer(e){
+    if(e.includes('https://')){
+      const count = e.split(' https://').length
+      var str = ' ' + e
+      for (let index = 0; index < count; index++) {
+        if(str.includes(' https://')){
+          var urlPos = str.indexOf(' https://')
+          var url = str.slice(urlPos + 1)
+          var urlLastPos = url.indexOf(' ')
+          if(urlLastPos == -1){
+            var urlTrunc = url.slice(0)
+          }
+          else{
+            var urlTrunc = url.slice(0, url.indexOf(' '))
+          }
+          var urlLink = '<a href="' + urlTrunc + '">' + urlTrunc + '</a>'
+          str = str.replace(urlTrunc, urlLink)
+          this.notes = str
+          /* var urlTruncCheck = str.slice(str.indexOf(' https://') - 1).slice(0, 9)
+
+            var urlTrunc = '<a href="' + url + '">' + url + '</a>'
+            str = str.replace(url, urlTrunc)
+            this.notes = str */
+        }
+      }
+    }
+    else{
+      this.notes = e
+    }
+  }
+
+  async getPosition(string, subString, index) {
+    return string.split(subString, index).join(subString).length;
   }
 
   async checkToday(){
@@ -96,12 +133,13 @@ export class ObjectInfoPage implements OnInit {
     this.db.collection('categories').doc(this.category).collection('Objects').ref.where("oid", "==", this.oid).get().then(async (objects: any) => {
       objects.forEach(object => {
         this.object = object.data()
+        this.URLReplacer(this.object.notes)
       });
     })
   }
 
   async getStudents() {
-    this.db.collection('users').ref.where("role", "==", "student").get().then(async (users: any) => {
+    this.db.collection('users').ref.get().then(async (users: any) => {
       var i = 0
       users.forEach(user => {
         this.students.push({ id: i, name: user.data().name, uid: user.id })

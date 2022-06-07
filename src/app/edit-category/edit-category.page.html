@@ -15,7 +15,7 @@
             <ion-card-title color="primary">Name</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item>
+            <ion-item lines="none">
                 <ion-input [(ngModel)]="name" placeholder="z.B. Kameras"></ion-input>
             </ion-item>
         </ion-card-content>
@@ -26,7 +26,7 @@
         </ion-card-header>
         <ion-card-content>
             <ion-item style="font-weight: 600; border-bottom: white solid 1px;">
-                <ion-label color="dark" slot="start" style="margin-bottom: 0;">Status</ion-label>
+                <ion-label color="dark" slot="start" style="margin-bottom: 0;">Statusname</ion-label>
                 <ion-label color="dark" slot="end">Farbe</ion-label>
             </ion-item>
 
@@ -45,9 +45,9 @@
             <ion-item>
                 <ion-input [(ngModel)]="status" slot="start" placeholder="z.B. Bereit"></ion-input>
                 <ion-select [(ngModel)]="colorCode" [interfaceOptions]="customPopoverOptions" interface="popover" slot="end" placeholder="Auswählen" style="margin: 0;">
-                    <ion-select-option class="standard-success" value="var(--ion-color-success)">Standard-Erfolg</ion-select-option>
-                    <ion-select-option class="standard-repair" value="var(--ion-color-danger)">Standard-Achtung</ion-select-option>
-                    <ion-select-option class="standard-other" value="var(--ion-color-secondary)">Standard-Anderes</ion-select-option>
+                    <ion-select-option class="standard-success" value="var(--ion-color-success)">Bereit</ion-select-option>
+                    <ion-select-option class="standard-repair" value="var(--ion-color-danger)">Verliehen</ion-select-option>
+                    <ion-select-option class="standard-other" value="var(--ion-color-secondary)">Reperatur</ion-select-option>
                     <ion-select-option value="own">Eigene Farbe</ion-select-option>
                 </ion-select>
             </ion-item>

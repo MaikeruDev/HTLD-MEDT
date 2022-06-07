@@ -36,17 +36,12 @@ export class HomePage implements OnInit {
     await this.loadCategories();
   }
 
-  all: any = true;
+  all: any = "All";
 
   uid: any;
 
   segmentChanged(event){
-    if(event.detail.value == "All"){
-      this.all = true;
-    }
-    else{
-      this.all = false;
-    }
+      this.all = event.detail.value;
   }
 
   async activateLoader(){

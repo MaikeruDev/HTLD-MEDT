@@ -25,6 +25,10 @@ span.color-picker{
 }
 
 
+ion-input{
+  --background: transparent !important;
+}
+
 
 @media only screen and (min-width: 850px) {
     /* ion-card{

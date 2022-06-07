@@ -20,6 +20,7 @@ export class EditObjectPage implements OnInit {
   colorCode;
   status;
   invnr;
+  grnr;
 
   customPopoverOptions: any = {
     cssClass: 'none',
@@ -33,6 +34,7 @@ export class EditObjectPage implements OnInit {
       this.notes = doc.data().notes;
       this.status = doc.data().status;
       this.invnr = doc.data().invnr;
+      this.grnr = doc.data().grnr;
     }).then( () => {
       this.db.collection('categories').doc(this.category).ref.get().then(async (cat: any) => {
         var _statusCodes = cat.data().statusCodes;
@@ -65,7 +67,8 @@ export class EditObjectPage implements OnInit {
         name: this.name,
         notes: this.notes,
         invnr: this.invnr,
-        status: this.statusCodes[this.colorCode].status
+        status: this.statusCodes[this.colorCode].status,
+        grnr: this.grnr,
       })
       this.modalController.dismiss()
     }

@@ -108,3 +108,7 @@ color-picker>div.color-picker.open{
 .open{
     position: inherit;
 }
+
+ion-input, ion-textarea{
+    border-bottom: 2px #151515 solid;
+}
