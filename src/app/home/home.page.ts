@@ -60,14 +60,18 @@ export class HomePage implements OnInit {
         
         var _tempCategory = _category.data();
         _tempCategory.cid = _category.id;
+
+        var __tempCategory = _category.data();
+        __tempCategory.cid = _category.id;
         var objects = [];
         var myObjects = [];
+        var readyObjects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
             var temp = _object.data();
             temp.id = _object.id;
             if(this.role == 'teacher'){
-              this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "==", this.uid).get().then(async (_docs: any) => {
+              this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "!=", null).get().then(async (_docs: any) => {
                 _docs.forEach(_doc => {
                   var now = new Date()
                   var startTime = _doc.data().startTime
@@ -98,6 +102,11 @@ export class HomePage implements OnInit {
                 })
               }
             }
+            
+            if(temp.status == "Bereit"){
+              readyObjects.push(temp)
+              console.log(temp.status)
+            }
             objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
           });
@@ -109,6 +118,10 @@ export class HomePage implements OnInit {
         _tempCategory.objects = myObjects
         this.myCategories.push(_tempCategory)
         this.myCategories.sort((a,b) => a.name.localeCompare(b.name));
+
+        __tempCategory.objects = readyObjects
+        this.readyObjects.push(__tempCategory)
+        this.readyObjects.sort((a,b) => a.name.localeCompare(b.name));
       });
     }).then(res => {
       this.loadingController.dismiss()
@@ -118,6 +131,7 @@ export class HomePage implements OnInit {
   async clearAll(){
     this.categories = []
     this.myCategories = []
+    this.readyObjects = []
   }
 
   async refresh(event){
@@ -129,14 +143,18 @@ export class HomePage implements OnInit {
 
         var _tempCategory = _category.data();
         _tempCategory.cid = _category.id;
+
+        var __tempCategory = _category.data();
+        __tempCategory.cid = _category.id;
         var objects = [];
         var myObjects = [];
+        var readyObjects = [];
         await this.db.collection('categories').doc(_category.id).collection('Objects').ref.get().then(async (_objects: any) =>{
           _objects.forEach(async _object => {
             var temp = _object.data();
             temp.id = _object.id;
             if(this.role == 'teacher'){
-              this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "==", this.uid).get().then(async (_docs: any) => {
+              this.db.collection('categories').doc(_category.id).collection('Objects').doc(_object.id).collection('reservierungen').ref.where("lehrer", "!=", null).get().then(async (_docs: any) => {
                 _docs.forEach(_doc => {
                   var now = new Date()
                   var startTime = _doc.data().startTime
@@ -167,6 +185,10 @@ export class HomePage implements OnInit {
                 })
               }
             }
+            if(temp.status == "Bereit"){
+              readyObjects.push(temp)
+              console.log(temp.status)
+            }
             objects.push(temp)
             objects.sort((a,b) => a.status.localeCompare(b.status));
           });
@@ -178,6 +200,10 @@ export class HomePage implements OnInit {
         _tempCategory.objects = myObjects
         this.myCategories.push(_tempCategory)
         this.myCategories.sort((a,b) => a.name.localeCompare(b.name));
+
+        __tempCategory.objects = readyObjects
+        this.readyObjects.push(__tempCategory)
+        this.readyObjects.sort((a,b) => a.name.localeCompare(b.name));
       });
     }).then(res => {
        try {
@@ -189,6 +215,7 @@ export class HomePage implements OnInit {
   }
 
   myObjects: any = []
+  readyObjects: any = []
 
   async openQRCode(){
     const modal = await this.modalController.create({

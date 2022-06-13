@@ -59,6 +59,14 @@
   </ion-card>
   <ion-card>
     <ion-card-content>
+      <ion-card-title color="primary">Gerätenummer</ion-card-title>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="grnr" placeholder="z.B. 12"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
       <ion-card-title color="primary">Notizen</ion-card-title>
       <ion-item lines="none">
         <ion-textarea [(ngModel)]="notes" placeholder="z.B. Abdeckung fehlt..."></ion-textarea>

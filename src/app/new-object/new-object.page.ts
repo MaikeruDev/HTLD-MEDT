@@ -18,6 +18,7 @@ export class NewObjectPage implements OnInit {
   notes;
   invnr;
   colorCode;
+  grnr;
 
   customPopoverOptions: any = {
     cssClass: 'my-custom-interface',
@@ -36,7 +37,7 @@ export class NewObjectPage implements OnInit {
   }
 
   async addItem(){
-    if(this.name == "" || !this.name  || this.colorCode == "" || !this.colorCode){
+    if(this.name == "" || !this.name  || this.colorCode == "" || !this.colorCode || !this.grnr || this.grnr == ""){
       const alert = await this.alertController.create({
         header: "Oopsie",
         message: "Bitte alle Felder ausfüllen.",
@@ -54,6 +55,7 @@ export class NewObjectPage implements OnInit {
         name: this.name,
         notes: this.notes,
         invnr: this.invnr,
+        grnr: this.grnr,
         status: this.statusCodes[this.colorCode].status
       }).then(async(docRef: any) => {
         this.db.collection('categories').doc(this.category).collection('Objects').doc(docRef.id).update({

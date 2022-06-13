@@ -158,7 +158,86 @@ notes;
     return new Date(value);
   }
 
+  catDays: any[] = [];
+
+  async delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async kekek(start, end, loop){
+    var alrStart = new Date(start * 1000)
+    var alrEnd = new Date(end * 1000)
+    alrStart.setHours(0, 0, 0, 0)
+    alrEnd.setHours(0, 0, 0, 0)
+    loop.setHours(0, 0, 0, 0)
+    if(alrStart <= loop && alrEnd >= loop){
+      this.valid.push(false)
+    }
+    else{
+      this.valid.push(true)
+    }
+    
+    return true
+  }
+
+  valid: any = []
+
   async addNewEvent() {
+    this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).collection('reservierungen').ref.get().then(async (docs: any) => {
+      var idx = 1
+      if(docs.size == 0){
+        let start = this.startDate;
+        let end = this.endDate;
+        let event = {
+        title: 'Reserviert von: ' + this.student.name /* start.getMinutes() */,
+        startTime: start,
+        endTime: end,
+        allDay: true,
+        lehrer: this.uid,
+        schueler: this.student.uid
+      }
+        this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).collection('reservierungen').add(event)
+      }
+      docs.forEach(async doc => {
+          let loop = new Date(this.startDate);
+          let newloop = loop.setDate(loop.getDate());
+          loop = new Date(newloop);
+          
+          for (let newloop = new Date(loop.setDate(loop.getDate())); newloop <= this.endDate; newloop = new Date(loop.setDate(loop.getDate() + 1))) {
+            await this.kekek(doc.data().startTime.seconds, doc.data().endTime.seconds, newloop);
+          }
+          if (idx === docs.size){ 
+            this.gogo()
+          }
+          idx++
+
+          /* while (loop <= this.endDate) {
+            //console.log(loop); EVERY DAY
+
+            var alrStart = new Date(doc.data().startTime.seconds * 1000)
+            var alrEnd = new Date(doc.data().endTime.seconds * 1000)
+
+            if(alrStart <= loop && alrEnd >= loop){
+              const alert = await this.alertController.create({
+                header: "Oopsie",
+                message: "Du überschneidest mit einem anderen Termin.",
+                buttons: ["RETRY"]
+              })
+        
+              await alert.present();
+
+              valid = false
+              return;
+            }
+
+            let newDate = loop.setDate(loop.getDate() + 1);
+            loop = new Date(newDate);
+          } */
+      })
+    })
+  }
+
+  async gogo(){
     if(this.student.id < 0){
       const alert = await this.alertController.create({
         header: "Oopsie",
@@ -167,6 +246,7 @@ notes;
       })
 
       await alert.present();
+      this.valid = []
     }
     else if (this.startDate > this.endDate){
       const alert = await this.alertController.create({
@@ -176,6 +256,7 @@ notes;
       })
 
       await alert.present();
+      this.valid = []
     }
     else{
       let start = this.startDate;
@@ -190,20 +271,25 @@ notes;
         lehrer: this.uid,
         schueler: this.student.uid
       }
-  
-      this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).collection('reservierungen').add(event)
-      /* var loop = new Date(start);
-      while(loop <= end){
-        alert(loop);           
-
-        var newDate = loop.setDate(loop.getDate() + 1);
-        loop = new Date(newDate);
-      } */
+      if(this.valid.includes(false)){
+        const alert = await this.alertController.create({
+          header: "Oopsie",
+          message: "Du überschneidest mit einem anderen Termin.",
+          buttons: ["RETRY"]
+        })
+        await alert.present();
+        this.valid = []
+      }
+      else{    
+        this.valid = []    
+        console.log(this.category, this.oid) 
+        this.db.collection('categories').doc(this.category).collection('Objects').doc(this.oid).collection('reservierungen').add(event)
+      }
     }
+    this.valid = []
   }
 
   onViewTitleChanged(title){
-    /* console.log(title) */
     this.viewTitle = title;
   }
   
